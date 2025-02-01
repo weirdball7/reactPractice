@@ -2,24 +2,30 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count,setCount] = useState(0);
 
-  const increessCount = () => {
-    setCount(count +1);
+  const colors = ['RED', 'GREEN', 'BLUE', 'YELLOW', 'PURPLE', 'ORANGE']
+
+  const [backgroundColor, setBackgroundColor] = useState(colors[0])
+
+  const changeColor = (color) => {
+    setBackgroundColor(color);  
   };
-
-  const decreessCount = () => {
-    setCount(count - 1);
-  };
-
+  
   return (
     <>
-      <h1>React Practice</h1>
-      <h2>useState</h2>
-
-      <button onClick={increessCount}>+</button>
-      <span>{count}</span>
-      <button onClick={decreessCount}>-</button>
+     {colors.map((color,) => (
+        <button
+          key={color}
+          style={{ backgroundColor: color }}
+          onClick={() => changeColor(color)}
+          // className={color === backgroundColor ? 'selected' : ''}
+        >
+          {color}
+        </button>
+      ))}
+      <div style={{ backgroundColor: backgroundColor }}>
+        <h1>Selected Color: {backgroundColor}</h1>
+      </div>
     </>
   )
 }
